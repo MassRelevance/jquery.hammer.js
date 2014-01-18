@@ -1,7 +1,7 @@
 {
     "name": "jquery-hammerjs",
-    "version": "1.0.0",
-    "main": ["jquery.hammer.js"],
+    "version": "1.0.1",
+    "main": ["jquery.hammer-standalone.js"],
     "dependencies": {
       "jquery": "*",
       "hammerjs": "1.0.x"
