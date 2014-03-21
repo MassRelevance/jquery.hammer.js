@@ -9,7 +9,7 @@ module.exports = (grunt) ->
  * <%= pkg.homepage %>\n
  *\n
  * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %> <<%= pkg.author.email %>>;\n
- * Licensed under the <%= _.pluck(pkg.licenses, "type").join(", ") %> license */' 
+ * Licensed under the <%= _.pluck(pkg.licenses, "type").join(", ") %> license */\n'
 
     # concat src files
     concat:
@@ -18,15 +18,29 @@ module.exports = (grunt) ->
         banner: '<%= meta.banner %>'
       standalone:
         src: [
-          'src/intro.js'
+          'src/jquery.hammer.prefix'
           'src/plugin.js'
-          'src/outro.js']
-        dest: 'jquery.hammer-standalone.js'
+          'src/standalone-export.js'
+          'src/jquery.hammer.suffix']
+        dest: 'jquery.hammer.js'
       full:
         src: [
-          'hammer.js/hammer.js'
-          'jquery.hammer-standalone.js']
-        dest: 'jquery.hammer.js'
+          'src/jquery.hammer.prefix'
+
+          'hammer.js/src/core.js'
+          'hammer.js/src/setup.js'
+          'hammer.js/src/utils.js'
+          'hammer.js/src/instance.js'
+          'hammer.js/src/event.js'
+          'hammer.js/src/pointerevent.js'
+          'hammer.js/src/detection.js'
+          'hammer.js/src/gestures/*.js'
+          'src/hammer-export.js' # simple export
+
+          'src/plugin.js'
+          'src/full-export.js'
+          'src/jquery.hammer.suffix']
+        dest: 'jquery.hammer-full.js'
 
     # minify the sourcecode
     uglify:
@@ -34,37 +48,22 @@ module.exports = (grunt) ->
         report: 'gzip'
         banner: '<%= meta.banner %>'
       standalone:
-        options:          
-          sourceMap: 'jquery.hammer-standalone.min.map'
-        files:
-          'jquery.hammer-standalone.min.js': ['jquery.hammer-standalone.js']
-      full:
-        options:          
+        options:
           sourceMap: 'jquery.hammer.min.map'
         files:
           'jquery.hammer.min.js': ['jquery.hammer.js']
+      full:
+        options:
+          sourceMap: 'jquery.hammer-full.min.map'
+        files:
+          'jquery.hammer-full.min.js': ['jquery.hammer-full.js']
 
     # check for optimisations and errors
     jshint:
       options:
-        curly: true
-        expr: true
-        newcap: true
-        quotmark: 'single'
-        regexdash: true
-        trailing: true
-        undef: true
-        unused: true
-        maxerr: 100
-        eqnull: true
-        sub: false
-        browser: true
-        node: true
-        globals:
-          Hammer: true,
-          define: false
+        jshintrc: true
       dist:
-        src: ['jquery.hammer-standalone.js']
+        src: ['jquery.hammer.js']
 
     # watch for changes
     watch:
@@ -79,7 +78,8 @@ module.exports = (grunt) ->
       server:
         options:
           hostname: "0.0.0.0"
-    
+          port: 8000
+
     # tests
     qunit:
       all: ['tests/**/*.html']

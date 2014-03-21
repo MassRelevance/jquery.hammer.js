@@ -2,7 +2,7 @@
   "name": "jquery-hammerjs",
   "title": "jQuery plugin for Hammer.JS",
   "description": "A javascript library for multi-touch gestures",
-  "version": "1.0.1",
+  "version": "1.0.5",
   "homepage": "http://eightmedia.github.com/hammer.js",
   "licenses": [
     {
@@ -26,16 +26,19 @@
   "bugs": {
     "url": "https://github.com/EightMedia/jquery.hammer.js/issues"
   },
+  "dependencies": {
+    "hammerjs": "1.0.x"
+  },
   "devDependencies": {
     "grunt": "0.4.x",
-    "grunt-contrib-connect": "0.5.x",
+    "grunt-contrib-connect": "0.7.x",
     "grunt-contrib-concat": "0.3.x",
-    "grunt-contrib-uglify": "0.2.x",
-    "grunt-contrib-jshint": "0.7.x",
-    "grunt-contrib-watch": "0.5.x",
+    "grunt-contrib-uglify": "0.4.x",
+    "grunt-contrib-jshint": "0.8.x",
+    "grunt-contrib-watch": "0.6.x",
     "faketouches": "git://github.com/jtangelder/faketouches.js.git",
     "underscore": "1.5.x",
-    "grunt-contrib-qunit": "~0.3.0"
+    "grunt-contrib-qunit": "~0.4.0"
   },
   "main": "jquery.hammer-standalone.js",
   "engines": {
